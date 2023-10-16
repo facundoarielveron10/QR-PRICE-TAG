@@ -5,29 +5,63 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import unnoba.poo.QRPriceTag.Model.User;
+import org.springframework.stereotype.Service;
+import unnoba.poo.QRPriceTag.model.User;
 import unnoba.poo.QRPriceTag.repository.UserRepository;
 import java.util.List;
 
+@Service
 public class UserServiceImp implements UserService, UserDetailsService {
     @Autowired
     private UserRepository repository;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User createUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    public User findByEmail(String username) {
+        return repository.findByEmail(username);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = repository.findByEmail(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("El usuario " + username + " no existe");
+        }
+        return user;
+    }
+
+    private boolean checkEmail(User user) throws Exception {
+        User userFound = repository.findByEmail(user.getUsername());
+        if (userFound != null) {
+            throw new Exception("Email ya registrado");
+        }
+        return true;
+    }
+
+    private boolean checkPassword(User user) throws Exception {
+        if (!user.getPassword().equals(user.getConfirmarPassword())) {
+            throw new Exception("Las contraseñas no son iguales");
+        }
+        return true;
+    }
+
+    @Override
+    public User createUser(User user) throws Exception {
+        if (checkEmail(user) && checkPassword(user)) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user = repository.save(user);
+        }
         return user;
     }
 
     @Override
     public List<User> getAllUsers() {
-        return repository.getUsers();
+        return repository.findAll();
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    public User getUserById(Long id) {
+        return repository.findById(id).get();
     }
 }

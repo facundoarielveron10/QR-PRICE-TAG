@@ -1,21 +1,12 @@
 package unnoba.poo.QRPriceTag.repository;
 
-import unnoba.poo.QRPriceTag.Model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import unnoba.poo.QRPriceTag.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository {
-    public List<User> users;
-
-    public UserRepository() {
-        users = new ArrayList<>();
-    }
-
-    public void addUser(User user) {
-        users.add(user);
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    public User findByEmail(String email);
 }

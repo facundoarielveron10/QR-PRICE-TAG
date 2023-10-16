@@ -1,0 +1,15 @@
+* {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+body {
+    color: #f0f8ffff;
+    font-family: 'Signika Negative', sans-serif;
+    background-color: #111111;
+    font-size: 0.875rem;
+}

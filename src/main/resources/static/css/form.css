@@ -1,0 +1,167 @@
+.align {
+    display: grid;
+    place-items: center;
+    margin: 0;
+    min-block-size: 100vh;
+}
+
+.grid {
+    inline-size: 90%;
+    margin-inline: auto;
+    max-inline-size: 20rem;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    user-select: none;
+    transition-property: color;
+    transition: ease-in-out;
+    transition-duration: 300ms;
+}
+
+.title:hover {
+    color: #ea4c88;
+    transition-property: color;
+    transition: ease-in-out;
+    transition-duration: 300ms;
+}
+
+a {
+    color: #eee;
+    outline: 0;
+    text-decoration: none;
+}
+
+a:focus,
+a:hover {
+    text-decoration: underline;
+}
+
+input {
+    background-image: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+.form {
+    display: grid;
+    gap: 0.875rem;
+}
+
+.form input[type="password"],
+.form input[type="email"],
+.form input[type="text"],
+.form input[type="submit"] {
+    inline-size: 100%;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field-content {
+    display: flex;
+}
+
+.label {
+    color: #777c81;
+    width: 17%;
+}
+
+.input {
+    flex: 1;
+}
+
+.fields {
+    color: #eee;
+}
+
+.fields label,
+.fields input[type="email"],
+.fields input[type="password"],
+.fields input[type="text"],
+.fields input[type="submit"] {
+    border-radius: 0.25rem;
+    padding: 1rem;
+}
+
+.fields label {
+    background-color: #363b41;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    padding-inline: 1.25rem;
+}
+
+.fields input[type="password"],
+.fields input[type="email"],
+.fields input[type="text"] {
+    background-color: #3b4148;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.fields input[type="password"]:focus,
+.fields input[type="password"]:hover,
+.fields input[type="email"]:focus,
+.fields input[type="email"]:hover,
+.fields input[type="text"]:hover,
+.fields input[type="text"]:focus {
+    background-color: #434a52;
+}
+
+.fields input[type="submit"] {
+    background-color: #ea4c88;
+    color: #eee;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.fields input[type="submit"]:focus,
+.fields input[type="submit"]:hover {
+    background-color: #d44179;
+}
+
+/* modules/text.css */
+
+p {
+    margin-block: 1.5rem;
+}
+
+.text--center {
+    text-align: center;
+}
+
+.link {
+    color: #ea4c88;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    background-color: #c00101;
+    border-radius: 0.25rem;
+}
+
+.field-error {
+    font-size: 13px;
+    margin-bottom: 0.25rem;
+    color: #c00101;
+    text-transform: uppercase;
+    font-weight: bold;
+}
