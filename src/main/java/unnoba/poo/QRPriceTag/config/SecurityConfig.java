@@ -14,13 +14,14 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((request) -> request
+                .csrf((csrf) -> csrf.ignoringRequestMatchers("/login", "/register"))
+                .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/webjars/**", "/resources/**","/css/**", "/img/**", "/js/**", "/register", "/login").permitAll()
-                        .requestMatchers("index.html").authenticated()
+                        .anyRequest().fullyAuthenticated()
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login").permitAll().defaultSuccessUrl("/").failureUrl("/login?error=true")
-                        .usernameParameter("email").passwordParameter("password"))
+                        .loginPage("/login").defaultSuccessUrl("/").failureUrl("/login?error=true")
+                        .loginProcessingUrl("/login").usernameParameter("email").passwordParameter("password"))
                 .logout((logout) -> logout
                         .permitAll().logoutSuccessUrl("/login?logout"));
 

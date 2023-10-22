@@ -31,6 +31,11 @@ public class UserController {
         model.addAttribute("user", new User());
         return "register";
     }
+
+    @GetMapping("/home")
+    public String home(Model model) {
+        return "home";
+    }
     // ------- //
 
     // - POST - //

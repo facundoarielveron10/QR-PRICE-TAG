@@ -37,6 +37,9 @@ public class User implements UserDetails {
     @Size(min = 8, message = "Al menos 8 caracteres")
     private String confirmarPassword;
 
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+
     public User() {
 
     }
@@ -79,7 +82,15 @@ public class User implements UserDetails {
     // METODOS DE LA INTERFAZ (UserDetails)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority(rol.name()));
+    }
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
     @Override
     public String getPassword() {
@@ -104,5 +115,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmarPassword='" + confirmarPassword + '\'' +
+                ", rol=" + rol +
+                '}';
     }
 }
