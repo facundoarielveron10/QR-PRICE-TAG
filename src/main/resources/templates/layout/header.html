@@ -1,0 +1,21 @@
+<nav class="header-nav">
+    <div class='header-container'>
+        <ul class="header-user">
+            <li>
+                <a class="bubbly-button" th:href="@{/logout}">Cerrar Sesión <i class="fas fa-sign-out-alt"></i></a>
+            </li>
+            <li class="header-information">
+                <p>Nombre: <span class="header-name" th:text="${user.getNombre()}"></span> <span class="header-name" th:text="${user.getApellido()}"></span></p>
+                <p>Email: <span class="header-email" th:text="${user.getEmail()}"></span></p>
+            </li>
+        </ul>
+        <ul class="header-action">
+            <li th:if="${user.getRol().toString() == 'ROLE_ADMIN'}">
+                <button  class="bubbly-button2">Crear Empresa</button>
+            </li>
+            <li th:if="${user.getRol().toString() == 'ROLE_ADMIN' or user.getRol().toString() == 'ROLE_GESTOR'}">
+                <button class="bubbly-button3">Crear Producto</button>
+            </li>
+        </ul>
+    </div>
+</nav>

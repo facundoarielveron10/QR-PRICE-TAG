@@ -38,10 +38,10 @@ public class User implements UserDetails {
     private String confirmarPassword;
 
     @Enumerated(EnumType.STRING)
-    private Rol rol;
+    @Column(name = "rol")
+    public Rol rol;
 
     public User() {
-
     }
 
     // METODOS DE LA CLASE
@@ -77,6 +77,12 @@ public class User implements UserDetails {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+    public Rol getRol() {
+        return rol;
+    }
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     // METODOS DE LA INTERFAZ (UserDetails)
