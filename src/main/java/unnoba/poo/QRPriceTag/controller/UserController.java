@@ -12,14 +12,24 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import unnoba.poo.QRPriceTag.model.Company;
 import unnoba.poo.QRPriceTag.model.User;
+import unnoba.poo.QRPriceTag.repository.CompanyRepository;
+import unnoba.poo.QRPriceTag.service.CompanyService;
 import unnoba.poo.QRPriceTag.service.UserService;
+
+import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class UserController {
     // ATRIBUTOS
     @Autowired
     private UserService userService;
+    @Autowired
+    private CompanyRepository companyRepository;
+    @Autowired
+    private CompanyService companyService;
 
     // - GET - //
     @GetMapping("/home")
@@ -27,7 +37,20 @@ public class UserController {
         // Obtener el usuario autenticado
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user", auth.getPrincipal());
+        // Obtener todas las empresas
+        List<Company> companies = Company.getAllCompanies(companyRepository);
+        model.addAttribute("companies", companies);
         return "home";
+    }
+
+    @GetMapping("/create-user")
+    public String createUser(Model model) {
+        // Obtener todas las empresas
+        List<Company> companies = Company.getAllCompanies(companyRepository);
+        model.addAttribute("companies", companies);
+        // Enviamos un modelo de usuario vacio
+        model.addAttribute("user", new User());
+        return "/createUser";
     }
 
     @GetMapping("/login")
@@ -35,31 +58,29 @@ public class UserController {
         model.addAttribute("user", new User());
         return "login";
     }
-
-    @GetMapping("/register")
-    public String register(Model model) {
-        model.addAttribute("user", new User());
-        return "register";
-    }
     // ------- //
 
     // - POST - //
-    @PostMapping("/register")
+    @PostMapping("/create-user")
     public String createUser(@Valid @ModelAttribute("user")User user, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
+            // Obtener todas las empresas
+            List<Company> companies = Company.getAllCompanies(companyRepository);
+            model.addAttribute("companies", companies);
+            // Enviamos los datos del usuario
             model.addAttribute("user", user);
-            return "/register";
+            return "/createUser";
         }
 
         try {
-            userService.createUser(user);
+            User newUser = userService.createUser(user);
         } catch (Exception e) {
             model.addAttribute("formError", e.getMessage());
             model.addAttribute("user", user);
-            return "/register";
+            return "/createUser";
         }
 
-        return "redirect:/";
+        return "redirect:/home";
     }
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)

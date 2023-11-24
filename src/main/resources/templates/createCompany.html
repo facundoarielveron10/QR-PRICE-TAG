@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" th:href="@{/img/QrPriceTag.png}" sizes="512x512">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/globals.css}">
+    <link rel="stylesheet" th:href="@{/css/forms/formCreate.css}">
+    <script src="https://kit.fontawesome.com/c2606052ff.js" crossorigin="anonymous"></script>
+    <title>Crear Empresa - QR PRICE TAG</title>
+</head>
+<body>
+    <div th:replace="~{layout/headerBack.html}"></div>
+    <main class="container">
+        <form class="form" method="POST" th:object="${company}" th:action="@{/create-company}" enctype="multipart/form-data">
+            <!-- Errores (GENERALES) -->
+            <div class="errors">
+                <div class="error" th:if="${formError}" th:text="${formError}">errors</div>
+                <div class="error" th:if="${#fields.hasErrors('razonSocial')}" th:errors="*{razonSocial}">errors</div>
+                <div class="error" th:if="${#fields.hasErrors('cuit')}" th:errors="*{cuit}">errors</div>
+                <div class="error" th:if="${logoError}" th:text="${logoError}">errors</div>
+            </div>
+            <!-- EMPRESAS -->
+            <div class="form-content">
+                <h1>Crear Empresa</h1>
+                <!-- CAMPOS -->
+                <div class="fields">
+                    <!-- Campo (RAZON SOCIAL) -->
+                    <div class="field">
+                        <!-- Entrada de Datos -->
+                        <div class="field-content">
+                            <label class="label" for="razon_social">
+                                <i class="fa-solid fa-pen-fancy"></i>
+                            </label>
+                            <input autocomplete="razon_social" id="razon_social" type="text" name="razon_social" class="input" placeholder="Razon Social" th:field="*{razonSocial}">
+                        </div>
+                    </div>
+                    <!-- Campo (CUIT) -->
+                    <div class="field">
+                        <!-- Entrada de Datos -->
+                        <div class="field-content">
+                            <label class="label" for="cuit">
+                                <i class="fa-solid fa-address-card"></i>
+                            </label>
+                            <input autocomplete="cuit" id="cuit" type="text" name="cuit" class="input" placeholder="Cuit" th:field="*{cuit}">
+                        </div>
+                    </div>
+                    <!-- Campo (LOGO) -->
+                    <div class="field">
+                        <!-- Entrada de Datos -->
+                        <div class="field-content">
+                            <label class="label" for="logo">
+                                <i class="fa-solid fa-mask"></i>
+                            </label>
+                            <input id="logo" type="file" name="logoFile" class="input" accept="image/*" placeholder="Subir Logo" th:field="*{logoFile}" formenctype="multipart/form-data">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ENVIAR -->
+            <div class="form-submit">
+                <!-- Boton (ENVIAR) -->
+                <div class="field">
+                    <input type="submit" value="Crear Empresa">
+                </div>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

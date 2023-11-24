@@ -11,7 +11,6 @@ import unnoba.poo.QRPriceTag.model.Rol;
 import unnoba.poo.QRPriceTag.model.User;
 import unnoba.poo.QRPriceTag.repository.UserRepository;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class UserServiceImp implements UserService, UserDetailsService {
@@ -53,15 +52,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         if (checkEmail(user) && checkPassword(user)) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
-            if (Objects.equals(user.getEmail(), "admin@admin.com")) {
-                user.setRol(Rol.ROLE_ADMIN);
-            } else if (Objects.equals(user.getEmail(), "gestor@gestor.com")) {
-                user.setRol(Rol.ROLE_GESTOR);
-            } else {
-                user.setRol(Rol.ROLE_USER);
-            }
-
+            user.setRol(Rol.ROLE_GESTOR);
             user = repository.save(user);
         }
         return user;

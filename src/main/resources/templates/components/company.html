@@ -1,0 +1,17 @@
+<div class="home-card">
+    <p th:text="Cuit + ': ' + ${company.getCuit()}" class="card-cuit"><span class="card-span"></span></p>
+    <div class="card-name">
+        <h3 th:text="${company.getRazonSocial()}"></h3>
+    </div>
+    <div class="card-body">
+        <div class="card-img">
+            <img th:src="@{'/logos/' + ${company.getLogo()}}" alt="Logo.png" />
+        </div>
+        <div class="card-action">
+            <button class="card-edit"><i class="fa-solid fa-pen"></i></button>
+            <button class="card-delete"><i class="fa-solid fa-trash"></i></button>
+        </div>
+        <p th:text="${company.isActivo ? 'Activo' : 'Inactivo'}"
+           th:class="${company.isActivo ? 'card-state-green' : 'card-state-red'}"></p>
+    </div>
+</div>

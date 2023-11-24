@@ -3,10 +3,12 @@ package unnoba.poo.QRPriceTag.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import unnoba.poo.QRPriceTag.model.Company;
 
 import java.util.Collection;
 import java.util.List;
@@ -36,10 +38,14 @@ public class User implements UserDetails {
     @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 8, message = "Al menos 8 caracteres")
     private String confirmarPassword;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "rol")
     public Rol rol;
+
+    @ManyToOne
+    @JoinColumn(name = "empresa")
+    @NotNull(message = "La empresa es obligatoria")
+    private Company company;
 
     public User() {
     }
@@ -83,6 +89,12 @@ public class User implements UserDetails {
     }
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+    public Company getCompany() {
+        return company;
+    }
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     // METODOS DE LA INTERFAZ (UserDetails)
@@ -133,6 +145,7 @@ public class User implements UserDetails {
                 ", password='" + password + '\'' +
                 ", confirmarPassword='" + confirmarPassword + '\'' +
                 ", rol=" + rol +
+                ", company=" + company +
                 '}';
     }
 }

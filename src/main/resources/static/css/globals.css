@@ -15,3 +15,68 @@ body {
     background-color: #111111;
     font-size: 0.875rem;
 }
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+button {
+    all: unset;
+}
+
+select {
+    all: unset;
+}
+
+.container {
+    margin: 5rem 10rem;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+    font-size: 1em;
+    padding: 1em 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color ease-in-out 300ms;
+}
+
+.button:focus {
+    outline: 0;
+}
+
+.button-rose {
+    background-color: #ff0081;
+    color: #fff;
+    box-shadow: 0 2px 15px rgba(255, 0, 130, 0.5);
+}
+
+.button-rose:hover {
+    background-color: #d3016b;
+}
+
+.button-black {
+    background-color: #262626;
+    color: #fff;
+    box-shadow: 0 2px 15px rgba(63, 63, 63, 0.5);
+}
+
+.button-black:hover {
+    background-color: #262626;
+}

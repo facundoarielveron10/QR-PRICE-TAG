@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" th:href="@{/img/QrPriceTag.png}" sizes="512x512">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/globals.css}">
+    <link rel="stylesheet" th:href="@{/css/forms/formCreate.css}">
+    <script src="https://kit.fontawesome.com/c2606052ff.js" crossorigin="anonymous"></script>
+    <title>Crear Usuario - QR PRICE TAG</title>
+</head>
+<body>
+<div th:replace="~{layout/headerBack.html}"></div>
+<main class="container">
+    <form class="form" method="POST" th:object="${user}" th:action="@{/create-user}">
+        <!-- Errores (GENERALES) -->
+        <div class="errors">
+            <div class="error" th:if="${formError}" th:text="${formError}">errors</div>
+            <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">errors</div>
+            <div class="error" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">errors</div>
+            <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{email}">errors</div>
+            <div class="error" th:if="${#fields.hasErrors('apellido')}" th:errors="*{password}">errors</div>
+            <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{confirmarPassword}">errors</div>
+            <div class="error" th:if="${#fields.hasErrors('company')}" th:errors="*{company}">errors</div>
+        </div>
+        <!-- USUARIOS -->
+        <div class="form-content">
+            <h1>Crear Usuario</h1>
+            <!-- CAMPOS -->
+            <div class="fields">
+                <!-- Campo (NOMBRE) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="nombre">
+                            <i class="fa-solid fa-signature"></i>
+                        </label>
+                        <input autocomplete="nombre" id="nombre" type="text" name="nombre" class="input" placeholder="Nombre" required th:field="*{nombre}">
+                    </div>
+                </div>
+                <!-- Campo (APELLIDO) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="apellido">
+                            <i class="fa-brands fa-lastfm"></i>
+                        </label>
+                        <input autocomplete="nombre" id="apellido" type="text" name="apellido" class="input" placeholder="Apellido" required th:field="*{apellido}">
+                    </div>
+                </div>
+                <!-- Campo (EMAIL) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="email">
+                            <i class="fa-solid fa-envelope"></i>
+                        </label>
+                        <input autocomplete="email" id="email" type="email" name="email" class="input" placeholder="Email" required th:field="*{email}">
+                    </div>
+                </div>
+                <!-- Campo (PASSWORD) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="password">
+                            <i class="fa-solid fa-lock"></i>
+                        </label>
+                        <input autocomplete="password" id="password" type="password" name="password" class="input" placeholder="Contraseña" required th:field="*{password}">
+                    </div>
+                </div>
+                <!-- Campo (REPETIR PASSWORD) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="confirmarPassword">
+                            <i class="fa-solid fa-lock"></i>
+                        </label>
+                        <input autocomplete="confirmarPassword" id="confirmarPassword" type="password" name="confirmarPassword" class="input" placeholder="Confirmar Contraseña" required th:field="*{confirmarPassword}">
+                    </div>
+                </div>
+                <!-- Campo (EMPRESA) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="empresa">
+                            <i class="fa-solid fa-building"></i>
+                        </label>
+                        <select class="input select" id="empresa" required th:field="*{company}">
+                            <option value="" selected>Selecciona una empresa</option>
+                            <option th:each="company : ${companies}"
+                                    th:value="${company.getId()}"
+                                    th:text="${company.getRazonSocial()}">
+
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ENVIAR -->
+        <div class="form-submit">
+            <!-- Boton (ENVIAR) -->
+            <div class="field">
+                <input type="submit" value="Crear Usuario">
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>
