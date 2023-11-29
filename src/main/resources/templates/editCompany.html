@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" th:href="@{/img/QrPriceTag.png}" sizes="512x512">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/globals.css}">
+    <link rel="stylesheet" th:href="@{/css/forms/formCreate.css}">
+    <link rel="stylesheet" th:href="@{/css/components/user.css}">
+    <link rel="stylesheet" th:href="@{/css/components/product.css}">
+    <link rel="stylesheet" th:href="@{/css/components/card.css}">
+    <script src="https://kit.fontawesome.com/c2606052ff.js" crossorigin="anonymous"></script>
+    <title>Editar Empresa - QR PRICE TAG</title>
+</head>
+<body>
+<div th:replace="~{layout/headerBack.html}"></div>
+<main class="container">
+    <form class="form" method="POST" th:object="${company}" th:action="${'/edit-company'}" enctype="multipart/form-data">
+        <!-- ID -->
+        <input type="hidden" th:value="${company.id}" th:attr="name='id'" />
+        <!-- Errores (GENERALES) -->
+        <div class="errors">
+            <div class="error" th:if="${formError}" th:text="${formError}">errors</div>
+            <div class="error" th:if="${#fields.hasErrors('razonSocial')}" th:errors="*{razonSocial}"></div>
+            <div class="error" th:if="${#fields.hasErrors('cuit')}" th:errors="*{cuit}"></div>
+        </div>
+        <!-- EMPRESAS -->
+        <div class="form-content">
+            <h1 th:text="${'Editar ' + company.getRazonSocial()}"></h1>
+            <!-- CAMPOS -->
+            <div class="fields">
+                <!-- Campo (RAZON SOCIAL) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="razon_social">
+                            <i class="fa-solid fa-pen-fancy"></i>
+                        </label>
+                        <input autocomplete="razon_social" id="razon_social" type="text" name="razon_social" class="input" placeholder="Razon Social" required th:value="${company.getRazonSocial()}" th:field="*{razonSocial}">
+                    </div>
+                </div>
+                <!-- Campo (CUIT) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="cuit">
+                            <i class="fa-solid fa-address-card"></i>
+                        </label>
+                        <input autocomplete="cuit" id="cuit" type="text" name="cuit" class="input" placeholder="Cuit" required th:value="${company.getCuit()}" th:field="*{cuit}">
+                    </div>
+                </div>
+                <!-- Campo (LOGO) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="logo">
+                            <i class="fa-solid fa-mask"></i>
+                        </label>
+                        <input id="logo" type="file" name="logoFile" class="input" accept="image/*" placeholder="Subir Logo" formenctype="multipart/form-data" th:value="${company.getLogo()}" th:field="*{logoFile}">
+                    </div>
+                    <span class="name-logo" th:if="${company.getLogo() != null}" th:text="${company.getLogo()}"></span>
+                </div>
+                <!-- Campo (ACTIVO) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="activo">
+                            <i class="fa-solid fa-check"></i>
+                        </label>
+                        <select class="input select" id="activo" required th:field="*{activo}">
+                            <option value="false" selected>INACTIVA</option>
+                            <option value="true">ACTIVA</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ENVIAR -->
+        <div class="form-submit">
+            <!-- Boton (ENVIAR) -->
+            <div class="field">
+                <input type="submit" value="Editar Empresa">
+            </div>
+        </div>
+    </form>
+    <!-- Listado de Usuarios -->
+    <div class="users">
+        <h2>Usuarios</h2>
+        <div class="list-user">
+            <div th:each="user : ${companyUsers}">
+                <div th:replace="~{components/user.html}"></div>
+            </div>
+        </div>
+        <div th:if="${companyUsers.isEmpty()}">
+            <p>Aún no hay ningún usuario asociado a esta empresa</p>
+        </div>
+    </div>
+    <!-- Listado de Productos -->
+    <div class="products">
+        <h2>Productos</h2>
+        <div class="home-cards list-product">
+            <div th:each="product : ${products}">
+                <div th:replace="~{components/cards/product.html}"></div>
+            </div>
+        </div>
+        <div th:if="${products.isEmpty()}">
+            <p>Aún no hay ningún producto asociado a esta empresa</p>
+        </div>
+    </div>
+</main>
+</body>
+</html>

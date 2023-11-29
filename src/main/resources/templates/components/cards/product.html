@@ -1,0 +1,19 @@
+<div class="home-card home-card-product">
+    <div class="card-head">
+        <p class="card-cuit">Codigo: <span class="card-span" th:text="${product.getCodigo()}">44418373</span></p>
+        <div class="card-name">
+            <h3 th:text="${product.getNombre()}"></h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-description">
+            <p th:text="${product.getDescripcion()}"></p>
+        </div>
+        <div class="card-action">
+            <a th:href="${'/edit-product/' + product.getId()}" class="card-edit"><i class="fa-solid fa-pen"></i></a>
+            <a th:href="${'/delete-product/' + product.getId()}" class="card-delete"><i class="fa-solid fa-trash"></i></a>
+        </div>
+        <p th:text="${product.isActivo() ? 'Activo' : 'Inactivo'}"
+           th:class="${product.isActivo() ? 'card-state-green' : 'card-state-red'}"></p>
+    </div>
+</div>

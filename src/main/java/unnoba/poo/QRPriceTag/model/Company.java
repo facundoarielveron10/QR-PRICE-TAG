@@ -2,12 +2,9 @@ package unnoba.poo.QRPriceTag.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 import unnoba.poo.QRPriceTag.repository.CompanyRepository;
-import unnoba.poo.QRPriceTag.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,15 +22,13 @@ public class Company {
     @Column(name = "logo")
     private String logo;
     @Column(name = "activo")
-    private boolean activo;
+    private Boolean activo = false;
     @OneToMany(mappedBy = "company")
     private List<User> users;
+    @OneToMany(mappedBy = "company")
+    private List<Product> products;
     @Transient
     private MultipartFile logoFile;
-
-    public static List<Company> getAllCompanies(CompanyRepository repository) {
-        return repository.findAll();
-    }
 
     public Long getId() {
         return id;
@@ -59,12 +54,6 @@ public class Company {
     public void setLogo(String logo) {
         this.logo = logo;
     }
-    public boolean isActivo() {
-        return activo;
-    }
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
     public List<User> getUsers() {
         return users;
     }
@@ -76,6 +65,15 @@ public class Company {
     }
     public void setLogoFile(MultipartFile logoFile) {
         this.logoFile = logoFile;
+    }
+    public Boolean isActivo() {
+        return activo;
+    }
+    public Boolean getActivo() {
+        return activo;
+    }
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 
     @Override

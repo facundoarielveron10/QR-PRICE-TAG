@@ -19,10 +19,10 @@
         <form class="form" method="POST" th:object="${company}" th:action="@{/create-company}" enctype="multipart/form-data">
             <!-- Errores (GENERALES) -->
             <div class="errors">
-                <div class="error" th:if="${formError}" th:text="${formError}">errors</div>
-                <div class="error" th:if="${#fields.hasErrors('razonSocial')}" th:errors="*{razonSocial}">errors</div>
-                <div class="error" th:if="${#fields.hasErrors('cuit')}" th:errors="*{cuit}">errors</div>
-                <div class="error" th:if="${logoError}" th:text="${logoError}">errors</div>
+                <div class="error" th:if="${formError}" th:text="${formError}"></div>
+                <div class="error" th:if="${#fields.hasErrors('razonSocial')}" th:errors="*{razonSocial}"></div>
+                <div class="error" th:if="${#fields.hasErrors('cuit')}" th:errors="*{cuit}"></div>
+                <div class="error" th:if="${logoError}" th:text="${logoError}"></div>
             </div>
             <!-- EMPRESAS -->
             <div class="form-content">
@@ -36,7 +36,7 @@
                             <label class="label" for="razon_social">
                                 <i class="fa-solid fa-pen-fancy"></i>
                             </label>
-                            <input autocomplete="razon_social" id="razon_social" type="text" name="razon_social" class="input" placeholder="Razon Social" th:field="*{razonSocial}">
+                            <input autocomplete="razon_social" id="razon_social" type="text" name="razon_social" class="input" placeholder="Razon Social" th:field="*{razonSocial}" required>
                         </div>
                     </div>
                     <!-- Campo (CUIT) -->
@@ -46,7 +46,7 @@
                             <label class="label" for="cuit">
                                 <i class="fa-solid fa-address-card"></i>
                             </label>
-                            <input autocomplete="cuit" id="cuit" type="text" name="cuit" class="input" placeholder="Cuit" th:field="*{cuit}">
+                            <input autocomplete="cuit" id="cuit" type="text" name="cuit" class="input" placeholder="Cuit" th:field="*{cuit}" required>
                         </div>
                     </div>
                     <!-- Campo (LOGO) -->
@@ -56,7 +56,20 @@
                             <label class="label" for="logo">
                                 <i class="fa-solid fa-mask"></i>
                             </label>
-                            <input id="logo" type="file" name="logoFile" class="input" accept="image/*" placeholder="Subir Logo" th:field="*{logoFile}" formenctype="multipart/form-data">
+                            <input id="logo" type="file" name="logoFile" class="input" accept="image/*" placeholder="Subir Logo" th:field="*{logoFile}" formenctype="multipart/form-data" required>
+                        </div>
+                    </div>
+                    <!-- Campo (ACTIVO) -->
+                    <div class="field">
+                        <!-- Entrada de Datos -->
+                        <div class="field-content">
+                            <label class="label" for="activo">
+                                <i class="fa-solid fa-check"></i>
+                            </label>
+                            <select class="input select" id="activo" th:field="*{activo}">
+                                <option value="false" selected>INACTIVA</option>
+                                <option value="true">ACTIVA</option>
+                            </select>
                         </div>
                     </div>
                 </div>

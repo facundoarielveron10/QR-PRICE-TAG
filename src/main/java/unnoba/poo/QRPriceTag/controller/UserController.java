@@ -13,13 +13,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import unnoba.poo.QRPriceTag.model.Company;
+import unnoba.poo.QRPriceTag.model.Product;
 import unnoba.poo.QRPriceTag.model.User;
 import unnoba.poo.QRPriceTag.repository.CompanyRepository;
+import unnoba.poo.QRPriceTag.repository.ProductRepository;
+import unnoba.poo.QRPriceTag.repository.UserRepository;
 import unnoba.poo.QRPriceTag.service.CompanyService;
 import unnoba.poo.QRPriceTag.service.UserService;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -29,7 +33,9 @@ public class UserController {
     @Autowired
     private CompanyRepository companyRepository;
     @Autowired
-    private CompanyService companyService;
+    private ProductRepository productRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     // - GET - //
     @GetMapping("/home")
@@ -38,15 +44,21 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user", auth.getPrincipal());
         // Obtener todas las empresas
-        List<Company> companies = Company.getAllCompanies(companyRepository);
+        List<Company> companies = companyRepository.findAll();
         model.addAttribute("companies", companies);
+        // Obtener todos los productos que sean de la empresa del usuario autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User authenticatedUser = (User) authentication.getPrincipal();
+        Company company = authenticatedUser.getCompany();
+        List<Product> products = productRepository.findByCompany(company);
+        model.addAttribute("products", products);
         return "home";
     }
 
     @GetMapping("/create-user")
     public String createUser(Model model) {
         // Obtener todas las empresas
-        List<Company> companies = Company.getAllCompanies(companyRepository);
+        List<Company> companies = companyRepository.findAll();
         model.addAttribute("companies", companies);
         // Enviamos un modelo de usuario vacio
         model.addAttribute("user", new User());
@@ -65,7 +77,7 @@ public class UserController {
     public String createUser(@Valid @ModelAttribute("user")User user, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             // Obtener todas las empresas
-            List<Company> companies = Company.getAllCompanies(companyRepository);
+            List<Company> companies = companyRepository.findAll();
             model.addAttribute("companies", companies);
             // Enviamos los datos del usuario
             model.addAttribute("user", user);

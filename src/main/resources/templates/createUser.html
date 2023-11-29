@@ -19,13 +19,13 @@
     <form class="form" method="POST" th:object="${user}" th:action="@{/create-user}">
         <!-- Errores (GENERALES) -->
         <div class="errors">
-            <div class="error" th:if="${formError}" th:text="${formError}">errors</div>
-            <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">errors</div>
-            <div class="error" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">errors</div>
-            <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{email}">errors</div>
-            <div class="error" th:if="${#fields.hasErrors('apellido')}" th:errors="*{password}">errors</div>
-            <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{confirmarPassword}">errors</div>
-            <div class="error" th:if="${#fields.hasErrors('company')}" th:errors="*{company}">errors</div>
+            <div class="error" th:if="${formError}" th:text="${formError}"></div>
+            <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+            <div class="error" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+            <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{email}"></div>
+            <div class="error" th:if="${#fields.hasErrors('apellido')}" th:errors="*{password}"></div>
+            <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{confirmarPassword}"></div>
+            <div class="error" th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></div>
         </div>
         <!-- USUARIOS -->
         <div class="form-content">

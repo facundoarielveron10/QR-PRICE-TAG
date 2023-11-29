@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/layout/header.css}">
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/globals.css}">
+    <link rel="stylesheet" th:href="@{/css/components/card.css}">
     <link rel="stylesheet" th:href="@{/css/home.css}">
     <script src="https://kit.fontawesome.com/c2606052ff.js" crossorigin="anonymous"></script>
     <title>Inicio - QR PRICE TAG</title>
@@ -19,7 +20,7 @@
         <h1
                 th:text="${user.getRol().toString() == 'ROLE_ADMIN' ?
                     'Listado de empresas y usuarios' :
-                    'Listado de productos'}"
+                    'Listado de productos de ' + user.getCompany().getRazonSocial()}"
                 class="home-title">
         </h1>
         <div class="home-flex">
@@ -27,14 +28,16 @@
                 <h2>Empresas</h2>
                 <div class="home-cards">
                     <div th:each="company : ${companies}">
-                        <div th:replace="~{components/company.html}"></div>
+                        <div th:replace="~{components/cards/company.html}"></div>
                     </div>
                 </div>
             </div>
             <div th:if="${user.getRol().toString() == 'ROLE_GESTOR'}" class="home-products">
                 <h2>Productos</h2>
                 <div class="home-cards">
-                    <div th:replace="~{components/product.html}"></div>
+                    <div th:each="product : ${products}">
+                        <div th:replace="~{components/cards/product.html}"></div>
+                    </div>
                 </div>
             </div>
         </div>

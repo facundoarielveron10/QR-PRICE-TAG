@@ -36,7 +36,14 @@ select {
 }
 
 .container {
-    margin: 5rem 10rem;
+    margin: 1rem 0;
+
+}
+
+@media (min-width: 1024px) {
+    .container {
+        margin: 5rem 10rem;
+    }
 }
 
 .button {

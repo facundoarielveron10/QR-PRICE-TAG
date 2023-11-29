@@ -1,0 +1,8 @@
+<div class="user">
+    <h3 th:text="${user.getNombre() + ' ' + user.getApellido()}"></h3>
+    <p th:text="${user.getEmail()}"></p>
+    <div class="user-action">
+        <a th:href="${'/edit-user/' + user.getId()}" class="card-edit"><i class="fa-solid fa-pen"></i></a>
+        <a th:href="${'/delete-user/' + user.getId()}" class="card-delete"><i class="fa-solid fa-trash"></i></a>
+    </div>
+</div>

@@ -8,8 +8,8 @@
             <img th:src="@{'/logos/' + ${company.getLogo()}}" alt="Logo.png" />
         </div>
         <div class="card-action">
-            <button class="card-edit"><i class="fa-solid fa-pen"></i></button>
-            <button class="card-delete"><i class="fa-solid fa-trash"></i></button>
+            <a th:href="${'/edit-company/' + company.getId()}" class="card-edit"><i class="fa-solid fa-pen"></i></a>
+            <a th:href="${'/delete-company/' + company.getId()}" class="card-delete"><i class="fa-solid fa-trash"></i></a>
         </div>
         <p th:text="${company.isActivo ? 'Activo' : 'Inactivo'}"
            th:class="${company.isActivo ? 'card-state-green' : 'card-state-red'}"></p>

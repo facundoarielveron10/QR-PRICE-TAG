@@ -46,6 +46,13 @@ input {
     display: flex;
 }
 
+.name-logo {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: .5rem;
+    color: #ff0081;
+}
+
 .label {
     display: flex;
     justify-content: center;
@@ -57,12 +64,24 @@ input {
     flex: 1;
 }
 
+.textarea {
+    border: none;
+    color: #FFFFFF;
+}
+
 .fields {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     color: #eee;
-    width: 50%;
+    width: 95%;
+}
+
+@media (min-width: 1024px) {
+    .fields {
+        width: 50%;
+    }
+
 }
 
 .fields label,
@@ -71,6 +90,7 @@ input {
 .fields input[type="text"],
 .fields input[type="file"],
 .fields input[type="submit"],
+.textarea,
 .select {
     border-radius: 0.25rem;
     padding: 1rem;
@@ -87,6 +107,7 @@ input {
 .fields input[type="email"],
 .fields input[type="text"],
 .fields input[type="file"],
+.textarea,
 .select {
     background-color: #3b4148;
     border-bottom-left-radius: 0;
@@ -101,9 +122,12 @@ input {
 .fields input[type="file"]:hover,
 .fields input[type="text"]:hover,
 .fields input[type="text"]:focus,
+.textarea:hover,
+.textarea:focus,
 .select:hover,
 .select:focus {
     background-color: #434a52;
+    outline: none;
 }
 
 input[type="submit"] {
@@ -139,3 +163,4 @@ input[type="submit"]:hover {
     background-color: #c00101;
     border-radius: 0.25rem;
 }
+

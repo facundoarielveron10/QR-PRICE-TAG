@@ -1,0 +1,71 @@
+.users {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.list-user {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #171717;
+    border-radius: .3rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .list-user {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 580px) {
+    .list-user {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+
+.user-action {
+    display: flex;
+    gap: 1rem;
+    margin-top: .5rem;
+}
+
+.user-edit {
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: .5rem;
+    border-radius: .1rem;
+    background-color: #63d1ff;
+    transition: background-color;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+.user-edit:hover {
+    background-color: #3f84a1;
+}
+
+.user-delete {
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: .5rem;
+    border-radius: .1rem;
+    background-color: #d30c0c;
+    transition: background-color;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+.user-delete:hover {
+    background-color: #a10d0d;
+}

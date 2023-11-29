@@ -10,17 +10,16 @@ import org.springframework.stereotype.Service;
 import unnoba.poo.QRPriceTag.model.Rol;
 import unnoba.poo.QRPriceTag.model.User;
 import unnoba.poo.QRPriceTag.repository.UserRepository;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService, UserDetailsService {
     @Autowired
     private UserRepository repository;
-
-    @Override
-    public User findByEmail(String username) {
-        return repository.findByEmail(username);
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -58,18 +57,25 @@ public class UserServiceImp implements UserService, UserDetailsService {
         return user;
     }
 
-    @Override
-    public List<User> getAllUsers() {
-        return repository.findAll();
-    }
-
-    @Override
-    public User getUserById(Long id) {
-        return repository.findById(id).get();
-    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public void editUser(User user, User userEdit) throws Exception {
+        // Actualizamos los datos
+        userEdit.setNombre(user.getNombre());
+        userEdit.setApellido(user.getApellido());
+        userEdit.setEmail(user.getEmail());
+        user.setCompany(user.getCompany());
+
+        repository.save(userEdit);
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        repository.delete(user);
     }
 }

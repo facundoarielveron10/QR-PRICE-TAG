@@ -43,6 +43,9 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/webjars/**", "/resources/**","/css/**", "/img/**", "/js/**", "/login").permitAll()
+                        .requestMatchers("/create-company").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/edit-company").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/delete-company").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

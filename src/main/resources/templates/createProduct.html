@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" th:href="@{/img/QrPriceTag.png}" sizes="512x512">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/globals.css}">
+    <link rel="stylesheet" th:href="@{/css/forms/formCreate.css}">
+    <script src="https://kit.fontawesome.com/c2606052ff.js" crossorigin="anonymous"></script>
+    <title>Crear Producto - QR PRICE TAG</title>
+</head>
+<body>
+<div th:replace="~{layout/headerBack.html}"></div>
+<main class="container">
+    <form class="form" method="POST" th:object="${product}" th:action="@{/create-product}">
+        <!-- Errores (GENERALES) -->
+        <div class="errors">
+            <div class="error" th:if="${formError}" th:text="${formError}">errors</div>
+            <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">errors</div>
+            <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">errors</div>
+            <div class="error" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}">errors</div>
+        </div>
+        <!-- EMPRESAS -->
+        <div class="form-content">
+            <h1>Crear Producto</h1>
+            <!-- CAMPOS -->
+            <div class="fields">
+                <!-- Campo (NOMBRE) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="nombre">
+                            <i class="fa-solid fa-pen-fancy"></i>
+                        </label>
+                        <input autocomplete="nombre" id="nombre" type="text" name="nombre" class="input" placeholder="Nombre" th:field="*{nombre}" required>
+                    </div>
+                </div>
+                <!-- Campo (DESCRIPCION) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="descripcion">
+                            <i class="fa-regular fa-file-lines"></i>
+                        </label>
+                        <textarea autocomplete="descripcion" id="descripcion" name="descripcion" class="input textarea" placeholder="Descripcion del Producto" th:field="*{descripcion}" required></textarea>
+                    </div>
+                </div>
+                <!-- Campo (CODIGO) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="codigo">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </label>
+                        <input autocomplete="codigo" id="codigo" type="text" name="codigo" class="input" placeholder="Codigo" th:field="*{codigo}" required>
+                    </div>
+                </div>
+                <!-- Campo (ACTIVO) -->
+                <div class="field">
+                    <!-- Entrada de Datos -->
+                    <div class="field-content">
+                        <label class="label" for="activo">
+                            <i class="fa-solid fa-check"></i>
+                        </label>
+                        <select class="input select" id="activo" th:field="*{activo}">
+                            <option value="false" selected>INACTIVA</option>
+                            <option value="true">ACTIVA</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ENVIAR -->
+        <div class="form-submit">
+            <!-- Boton (ENVIAR) -->
+            <div class="field">
+                <input type="submit" value="Crear Producto">
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>
