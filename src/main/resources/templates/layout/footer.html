@@ -1,0 +1,6 @@
+<div th:if="${user.getRol().toString() == 'ROLE_GESTOR'}"  class="footer-company">
+    <div class="card-img footer-company-img">
+        <img th:src="@{'/logos/' + ${user.getCompany().getLogo()}}" alt="Logo.png" />
+    </div>
+    <p class="footer-company-name" th:text="${user.getCompany().getRazonSocial()}"></p>
+</div>

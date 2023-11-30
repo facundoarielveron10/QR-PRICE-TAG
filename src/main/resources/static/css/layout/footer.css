@@ -1,0 +1,16 @@
+.footer-company {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0 2rem;
+}
+.footer-company-name {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.card-img.footer-company-img img {
+    height: 3rem;
+    width: 3rem;
+}

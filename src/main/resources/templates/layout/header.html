@@ -7,7 +7,6 @@
             <li class="header-information">
                 <p>Nombre: <span class="header-name" th:text="${user.getNombre()}"></span> <span class="header-name" th:text="${user.getApellido()}"></span></p>
                 <p>Email: <span class="header-email" th:text="${user.getEmail()}"></span></p>
-                <p th:if="${user.getRol().toString() == 'ROLE_GESTOR'}">Empresa: <span class="header-email" th:text="${user.getCompany().getRazonSocial()}"></span></p>
             </li>
         </ul>
         <ul class="header-action">

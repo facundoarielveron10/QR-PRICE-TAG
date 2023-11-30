@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" th:href="@{/img/QrPriceTag.png}" sizes="512x512">
     <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/globals.css}">
     <link rel="stylesheet" th:href="@{/css/components/card.css}">
@@ -15,7 +16,7 @@
     <title>Inicio - QR PRICE TAG</title>
 </head>
 <body>
-    <div class="sidebar-content" th:replace="~{layout/header.html}"></div>
+    <header class="sidebar-content" th:replace="~{layout/header.html}"></header>
     <main class="home-container">
         <h1
                 th:text="${user.getRol().toString() == 'ROLE_ADMIN' ?
@@ -42,5 +43,6 @@
             </div>
         </div>
     </main>
+    <footer th:replace="~{layout/footer.html}"></footer>
 </body>
 </html>
